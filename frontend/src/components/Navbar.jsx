@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Film, Search, Sun, Moon } from 'lucide-react';
 import axios from 'axios';
+import { API_URL } from '../api';
 
 export default function Navbar() {
     const [query, setQuery] = useState('');
@@ -43,7 +44,7 @@ export default function Navbar() {
             }
             setLoading(true);
             try {
-                const res = await axios.get(`http://127.0.0.1:5000/search_api?q=${query}`);
+                const res = await axios.get(`${API_URL}/search_api?q=${query}`);
                 if (isActive) {
                     setResults(Array.isArray(res.data) ? res.data.slice(0, 5) : []); 
                 }

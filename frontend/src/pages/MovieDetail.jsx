@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Plus, Star, ArrowLeft, Clock } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { API_URL } from '../api';
 
 export default function MovieDetail() {
     const { name } = useParams();
@@ -12,7 +13,7 @@ export default function MovieDetail() {
     const [hoveredStar, setHoveredStar] = useState(0);
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:5000/${name}`)
+        axios.get(`${API_URL}/${name}`)
             .then(res => {
                 setMovie(res.data);
                 if (res.data.userRating) setUserRating(res.data.userRating);
@@ -25,13 +26,13 @@ export default function MovieDetail() {
     }, [name]);
 
     const handleWatchLater = () => {
-        axios.post(`http://127.0.0.1:5000/watch_later/${name}`)
+        axios.post(`${API_URL}/watch_later/${name}`)
             .then(res => toast.success('Added to Watch Later!'))
             .catch(err => toast.error('Failed to add.'));
     };
 
     const handleRating = (stars) => {
-        axios.post(`http://127.0.0.1:5000/rate/${name}`, { stars })
+        axios.post(`${API_URL}/rate/${name}`, { stars })
             .then(res => {
                 setUserRating(stars);
                 toast.success(`Rated ${stars} star${stars > 1 ? 's' : ''}!`);

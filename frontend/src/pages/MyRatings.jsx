@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Star, Play } from 'lucide-react';
+import { API_URL } from '../api';
 
 const MovieCard = ({ movie }) => (
     <Link to={`/movie/${movie.name}`}>
@@ -33,8 +34,8 @@ export default function MyRatings() {
             setLoading(true);
             try {
                 const url = filterStars > 0 
-                    ? `http://127.0.0.1:5000/ratings?stars=${filterStars}`
-                    : `http://127.0.0.1:5000/ratings`;
+                    ? `${API_URL}/ratings?stars=${filterStars}`
+                    : `${API_URL}/ratings`;
                 const res = await axios.get(url);
                 setRatings(res.data);
             } catch (err) {

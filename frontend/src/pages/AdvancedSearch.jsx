@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Play, Search } from 'lucide-react';
+import { API_URL } from '../api';
 
 const MovieCard = ({ movie }) => (
     <Link to={`/movie/${movie.name}`}>
@@ -44,7 +45,7 @@ export default function AdvancedSearch() {
         setSearched(true);
         
         try {
-            const res = await axios.get(`http://127.0.0.1:5000/search_api?q=${query}&type=${type}&genre=${genre}`);
+            const res = await axios.get(`${API_URL}/search_api?q=${query}&type=${type}&genre=${genre}`);
             setResults(res.data);
         } catch (err) {
             console.error(err);

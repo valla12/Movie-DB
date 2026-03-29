@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Play, Star, Sparkles, ArrowLeft } from 'lucide-react';
+import { API_URL } from '../api';
 
 const moods = [
     { id: 'happy', emoji: '😊', label: 'Happy', desc: 'Feel-good comedies & fun vibes', gradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)' },
@@ -47,7 +48,7 @@ export default function MoodFinder() {
         setLoading(true);
         setMovies([]);
         try {
-            const res = await axios.get(`http://127.0.0.1:5000/mood/${mood.id}`);
+            const res = await axios.get(`${API_URL}/mood/${mood.id}`);
             setMovies(res.data.results || []);
             setMatchedGenre(res.data.genre || '');
         } catch (err) {

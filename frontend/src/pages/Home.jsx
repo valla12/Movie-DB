@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Play } from 'lucide-react';
+import { API_URL } from '../api';
 
 const MovieCard = ({ movie }) => (
     <Link to={`/movie/${movie.name}`}>
@@ -32,8 +33,8 @@ export default function Home() {
         const fetchData = async () => {
             try {
                 const [homeRes, watchRes] = await Promise.all([
-                    axios.get('http://127.0.0.1:5000/'),
-                    axios.get('http://127.0.0.1:5000/watch_later')
+                    axios.get(`${API_URL}/`),
+                    axios.get(`${API_URL}/watch_later`)
                 ]);
                 setMovies(homeRes.data);
                 setWatchlist(watchRes.data);

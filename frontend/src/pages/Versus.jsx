@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Swords, Trophy } from 'lucide-react';
+import { API_URL } from '../api';
 
 export default function Versus() {
     const [pool, setPool] = useState([]);
@@ -13,7 +14,7 @@ export default function Versus() {
     const fetchMatchups = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://127.0.0.1:5000/versus/matchups');
+            const res = await axios.get(`${API_URL}/versus/matchups`);
             setPool(res.data);
             setCurrentIndex(0);
         } catch (err) {
@@ -24,7 +25,7 @@ export default function Versus() {
 
     const fetchLeaderboard = async () => {
         try {
-            const res = await axios.get('http://127.0.0.1:5000/versus/leaderboard');
+            const res = await axios.get(`${API_URL}/versus/leaderboard`);
             setLeaderboard(res.data);
         } catch (err) {
             console.error("Failed to fetch leaderboard", err);
@@ -43,7 +44,7 @@ export default function Versus() {
 
     const handleVote = async (winner, loser) => {
         try {
-            const res = await axios.post('http://127.0.0.1:5000/versus/vote', { winner, loser });
+            const res = await axios.post(`${API_URL}/versus/vote`, { winner, loser });
             setVoteResult(res.data);
             
             // Wait 2.5 seconds showing stats, then next matchup
