@@ -1,15 +1,6 @@
 from flask import *
-from flask_cors import *
-from flask_sqlalchemy import SQLAlchemy
+from extensions import app, db, api, key
 import requests
-
-app = Flask(__name__)
-api = "https://www.omdbapi.com/?t="
-key = "&apikey=7de076f4"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///movies.db"
-db = SQLAlchemy(app)
-
-CORS(app)
 
 
 @app.route('/',methods=['GET'])

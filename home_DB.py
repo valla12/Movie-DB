@@ -1,5 +1,4 @@
-from main import db
-from main import api, key
+from extensions import db, api, key
 import requests
 
 
