@@ -1,5 +1,5 @@
-from __main__ import db
-from __main__ import api,key
+from main import db
+from main import api, key
 import requests
 
 
